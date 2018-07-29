@@ -88,13 +88,6 @@
 					<form id="form" method="post" action="">
 						<span id="nick"></span>
 						<textarea id="input" class="mousetrap"></textarea>
-						<span id="upload-tooltip" class="tooltipped tooltipped-w tooltipped-no-touch" aria-label="Upload file">
-							<input id="upload-input" type="file" multiple>
-							<button id="upload" type="button" aria-label="Upload file"></button>
-						</span>
-						<span id="submit-tooltip" class="tooltipped tooltipped-w tooltipped-no-touch" aria-label="Send message">
-							<button id="submit" type="submit" aria-label="Send message"></button>
-						</span>
 					</form>
 				</div>
 				<div id="sign-in" class="window" role="tabpanel" aria-label="Sign-in"></div>
