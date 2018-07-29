@@ -171,9 +171,8 @@ module.exports = {
 	// Set users' default `quit` and `part` messages if they are not providing
 	// one.
 	//
-	// This value is set to `"The Lounge - https://thelounge.chat"` by
-	// default.
-	leaveMessage: "The Lounge - https://thelounge.chat",
+	// This value is set to `""` by default.
+	leaveMessage: "",
 
 	// ## Default network
 
