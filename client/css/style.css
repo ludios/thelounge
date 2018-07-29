@@ -1170,18 +1170,6 @@ background on hover (unless active) */
 	word-break: normal;
 }
 
-/* Parsed nicks and channels */
-
-#chat .user,
-.inline-channel {
-	cursor: pointer;
-}
-
-.chat .user:hover,
-.inline-channel:hover {
-	text-decoration: underline;
-}
-
 /* Nicknames */
 
 #chat .user {
@@ -1270,11 +1258,6 @@ background on hover (unless active) */
 #chat .topic .content,
 #chat .topic_set_by .content {
 	color: var(--body-color-muted);
-}
-
-#chat .action .from,
-#chat .action .text,
-#chat .action .user {
 }
 
 #chat .notice .text,

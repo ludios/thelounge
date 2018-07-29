@@ -136,20 +136,6 @@ $(function() {
 		return false;
 	});
 
-	chat.on("click", ".inline-channel", function() {
-		const name = $(this).attr("data-chan");
-		const chan = utils.findCurrentNetworkChan(name);
-
-		if (chan.length) {
-			chan.trigger("click");
-		}
-
-		socket.emit("input", {
-			target: chat.data("id"),
-			text: "/join " + name,
-		});
-	});
-
 	chat.on("click", ".condensed-summary .content", function() {
 		$(this).closest(".msg.condensed").toggleClass("closed");
 	});

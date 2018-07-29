@@ -10,7 +10,7 @@ describe("parse Handlebars helper", () => {
 			expected: "&lt;img onerror&#x3D;&#x27;location.href&#x3D;&quot;<a href=\"http://youtube.com\" target=\"_blank\" rel=\"noopener\">//youtube.com</a>&quot;&#x27;&gt;",
 		}, {
 			input: '#&">bug',
-			expected: '<span class="inline-channel" role="button" tabindex="0" data-chan="#&amp;&quot;&gt;bug">#&amp;&quot;&gt;bug</span>',
+			expected: "#&amp;&quot;&gt;bug",
 		}];
 
 		const actual = testCases.map((testCase) => parse(testCase.input));
@@ -140,69 +140,6 @@ describe("parse Handlebars helper", () => {
 		expect(actual).to.deep.equal(expected);
 	});
 
-	it("should find channels", () => {
-		const testCases = [{
-			input: "#a",
-			expected:
-				'<span class="inline-channel" role="button" tabindex="0" data-chan="#a">' +
-					"#a" +
-				"</span>",
-		}, {
-			input: "#test",
-			expected:
-				'<span class="inline-channel" role="button" tabindex="0" data-chan="#test">' +
-					"#test" +
-				"</span>",
-		}, {
-			input: "#äöü",
-			expected:
-				'<span class="inline-channel" role="button" tabindex="0" data-chan="#äöü">' +
-					"#äöü" +
-				"</span>",
-		}, {
-			input: "inline #channel text",
-			expected:
-				"inline " +
-				'<span class="inline-channel" role="button" tabindex="0" data-chan="#channel">' +
-					"#channel" +
-				"</span>" +
-				" text",
-		}, {
-			input: "#1,000",
-			expected:
-				'<span class="inline-channel" role="button" tabindex="0" data-chan="#1,000">' +
-					"#1,000" +
-				"</span>",
-		}, {
-			input: "@#a",
-			expected:
-				"@" +
-				'<span class="inline-channel" role="button" tabindex="0" data-chan="#a">' +
-					"#a" +
-				"</span>",
-		}];
-
-		const actual = testCases.map((testCase) => parse(testCase.input));
-		const expected = testCases.map((testCase) => testCase.expected);
-
-		expect(actual).to.deep.equal(expected);
-	});
-
-	it("should not find channels", () => {
-		const testCases = [{
-			input: "hi#test",
-			expected: "hi#test",
-		}, {
-			input: "#",
-			expected: "#",
-		}];
-
-		const actual = testCases.map((testCase) => parse(testCase.input));
-		const expected = testCases.map((testCase) => testCase.expected);
-
-		expect(actual).to.deep.equal(expected);
-	});
-
 	[{
 		name: "bold",
 		input: "\x02bold",
@@ -299,10 +236,8 @@ describe("parse Handlebars helper", () => {
 		}, {
 			input: "\x02#\x038,9thelounge",
 			expected:
-				'<span class="inline-channel" role="button" tabindex="0" data-chan="#thelounge">' +
-					'<span class="irc-bold">#</span>' +
-					'<span class="irc-bold irc-fg8 irc-bg9">thelounge</span>' +
-				"</span>",
+				'<span class="irc-bold">#</span>' +
+				'<span class="irc-bold irc-fg8 irc-bg9">thelounge</span>',
 		}];
 
 		const actual = testCases.map((testCase) => parse(testCase.input));
@@ -334,11 +269,6 @@ describe("parse Handlebars helper", () => {
 		input: "https://i.❤️.thelounge.chat",
 		// FIXME: Emoji in text should be `<span class="emoji">❤️</span>`. See https://github.com/thelounge/thelounge/issues/1784
 		expected: '<a href="https://i.❤️.thelounge.chat" target="_blank" rel="noopener">https://i.❤️.thelounge.chat</a>',
-	}, {
-		name: "wrapped in channels",
-		input: "#i❤️thelounge",
-		// FIXME: Emoji in text should be `<span class="emoji">❤️</span>`. See https://github.com/thelounge/thelounge/issues/1784
-		expected: '<span class="inline-channel" role="button" tabindex="0" data-chan="#i❤️thelounge">#i❤️thelounge</span>',
 	}].forEach((item) => { // TODO: In Node v6+, use `{name, input, expected}`
 		it(`should find emoji: ${item.name}`, function() {
 			expect(parse(item.input)).to.equal(item.expected);
@@ -348,11 +278,7 @@ describe("parse Handlebars helper", () => {
 	it("should optimize generated html", () => {
 		const testCases = [{
 			input: 'test \x0312#\x0312\x0312"te\x0312st\x0312\x0312\x0312\x0312\x0312\x0312\x0312\x0312\x0312\x0312\x0312a',
-			expected:
-			"test " +
-				'<span class="inline-channel" role="button" tabindex="0" data-chan="#&quot;testa">' +
-				'<span class="irc-fg12">#&quot;testa</span>' +
-			"</span>",
+			expected: 'test <span class="irc-fg12">#&quot;testa</span>',
 		}];
 
 		const actual = testCases.map((testCase) => parse(testCase.input));
@@ -382,41 +308,5 @@ describe("parse Handlebars helper", () => {
 		const expected = testCases.map((testCase) => testCase.expected);
 
 		expect(actual).to.deep.equal(expected);
-	});
-
-	it("should not find channel in fragment", () => {
-		const testCases = [{
-			input: "http://example.com/#hash",
-			expected:
-				'<a href="http://example.com/#hash" target="_blank" rel="noopener">' +
-					"http://example.com/#hash" +
-				"</a>",
-		}];
-
-		const actual = testCases.map((testCase) => parse(testCase.input));
-		const expected = testCases.map((testCase) => testCase.expected);
-
-		expect(actual).to.deep.equal(expected);
-	});
-
-	it("should not overlap parts", () => {
-		const input = "Url: http://example.com/path Channel: ##channel";
-		const actual = parse(input);
-
-		expect(actual).to.equal(
-			'Url: <a href="http://example.com/path" target="_blank" rel="noopener">http://example.com/path</a> ' +
-			'Channel: <span class="inline-channel" role="button" tabindex="0" data-chan="##channel">##channel</span>'
-		);
-	});
-
-	it("should handle overlapping parts by using first starting", () => {
-		const input = "#test-https://example.com";
-		const actual = parse(input);
-
-		expect(actual).to.equal(
-			'<span class="inline-channel" role="button" tabindex="0" data-chan="#test-https://example.com">' +
-				"#test-https://example.com" +
-			"</span>"
-		);
 	});
 });

@@ -2,7 +2,6 @@
 
 const Handlebars = require("handlebars/runtime");
 const parseStyle = require("./ircmessageparser/parseStyle");
-const findChannels = require("./ircmessageparser/findChannels");
 const findLinks = require("./ircmessageparser/findLinks");
 const findEmoji = require("./ircmessageparser/findEmoji");
 const merge = require("./ircmessageparser/merge");
@@ -60,29 +59,20 @@ function createFragment(fragment) {
 	return escapedText;
 }
 
-// Transform an IRC message potentially filled with styling control codes, URLs,
-// and channels into a string of HTML elements to display on the client.
-module.exports = function parse(text, users) {
-	// if it's not the users we're expecting, but rather is passed from Handlebars (occurs when users passed to template is null or undefined)
-	if (users && users.hash) {
-		users = [];
-	}
-
+// Transform an IRC message potentially filled with styling control codes
+// and URLs into a string of HTML elements to display on the client.
+module.exports = function parse(text) {
 	// Extract the styling information and get the plain text version from it
 	const styleFragments = parseStyle(text);
 	const cleanText = styleFragments.map((fragment) => fragment.text).join("");
 
-	// On the plain text, find channels and URLs, returned as "parts". Parts are
+	// On the plain text, find URLs and emojis, returned as "parts". Parts are
 	// arrays of objects containing start and end markers, as well as metadata
-	// depending on what was found (channel or link).
-	const channelPrefixes = ["#", "&"]; // TODO Channel prefixes should be RPL_ISUPPORT.CHANTYPES
-	const userModes = ["!", "@", "%", "+"]; // TODO User modes should be RPL_ISUPPORT.PREFIX
-	const channelParts = findChannels(cleanText, channelPrefixes, userModes);
+	// depending on what was found.
 	const linkParts = findLinks(cleanText);
 	const emojiParts = findEmoji(cleanText);
 
-	const parts = channelParts
-		.concat(linkParts)
+	const parts = linkParts
 		.concat(emojiParts);
 
 	// Merge the styling information with the channels / URLs / text objects and
@@ -91,13 +81,10 @@ module.exports = function parse(text, users) {
 		// Create HTML strings with styling information
 		const fragments = textPart.fragments.map(createFragment).join("");
 
-		// Wrap these potentially styled fragments with links and channel buttons
+		// Wrap these potentially styled fragments
 		if (textPart.link) {
 			const escapedLink = Handlebars.Utils.escapeExpression(textPart.link);
 			return `<a href="${escapedLink}" target="_blank" rel="noopener">${fragments}</a>`;
-		} else if (textPart.channel) {
-			const escapedChannel = Handlebars.Utils.escapeExpression(textPart.channel);
-			return `<span class="inline-channel" role="button" tabindex="0" data-chan="${escapedChannel}">${fragments}</span>`;
 		} else if (textPart.emoji) {
 			if (!emojiMap[textPart.emoji]) {
 				return `<span class="emoji" role="img">${fragments}</span>`;
