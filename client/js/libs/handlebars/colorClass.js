@@ -1,17 +1,16 @@
 "use strict";
 
+// Use xchat's coloring algorithm; see xchat/src/common/text.c
+const rcolors = [19, 20, 22, 24, 25, 26, 27, 28, 29];
+
 // Generates a string from "color-1" to "color-32" based on an input string
 module.exports = function(str) {
-	let hash = 0;
+	let sum = 0;
 
 	for (let i = 0; i < str.length; i++) {
-		hash += str.charCodeAt(i);
+		sum += str.charCodeAt(i);
 	}
 
-	/*
-		Modulo 32 lets us be case insensitive for ascii
-		due to A being ascii 65 (100 0001)
-		 while a being ascii 97 (110 0001)
-	*/
-	return "color-" + (1 + hash % 32);
+	const index = sum % rcolors.length;
+	return "color-" + rcolors[index];
 };
