@@ -35,7 +35,7 @@ const settings = {
 	motd: true,
 	notification: true,
 	notifyAllMessages: false,
-	showSeconds: false,
+	showSeconds: true,
 	statusMessages: "condensed",
 	theme: $("#theme").attr("data-server-theme"),
 	media: true,
