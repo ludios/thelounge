@@ -14,9 +14,6 @@
 		</button>
 		<div class="lobby-wrap">
 			<span class="name" title="{{name}}">{{name}}</span>
-			<span class="not-secure-tooltip tooltipped tooltipped-w" aria-label="Insecure connection">
-				<span class="not-secure-icon"></span>
-			</span>
 			<span class="not-connected-tooltip tooltipped tooltipped-w" aria-label="Disconnected">
 				<span class="not-connected-icon"></span>
 			</span>

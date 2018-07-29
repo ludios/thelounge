@@ -3,29 +3,29 @@
 
 :root {
 	/* Main text color */
-	--body-color: #222;
+	--body-color: #000;
 
 	/* Secondary text color, dimmed. Make sure to keep contrast WCAG 2.0 AA compliant on var(--window-bg-color) */
-	--body-color-muted: #767676;
+	--body-color-muted: #5f5f5f;
 
 	/* Background color of the whole page */
-	--body-bg-color: #415364;
-
-	/* Links and link-looking buttons */
-	--link-color: #50a656;
+	--body-bg-color: #ccc5c1;
 
 	/* Background color of the main window */
-	--window-bg-color: #fff;
+	--window-bg-color: #e4dcd7;
 
 	/* Color of the date marker, text and separator */
-	--date-marker-color: rgba(0, 107, 59, 0.5);
+	--date-marker-color: rgba(84, 52, 39, 0.5);
 
 	/* Color of the unread message marker, text and separator */
-	--unread-marker-color: rgba(231, 76, 60, 0.5);
+	--unread-marker-color: rgba(125, 35, 25, 0.65);
 
-	/* Background and left-border color of highlight messages */
-	--highlight-bg-color: #efe8dc;
-	--highlight-border-color: #b08c4f;
+	/* Color of highlight messages */
+	--highlight-fg-color: #da0000;
+	--highlight-border-color: #da0000;
+
+	/* Color for various borders */
+	--separator-border-color: #bfb2b2;
 }
 
 /* Samsung Internet <7.0 and Microsoft Edge support (yes, both of them use webkit prefix) */
@@ -61,16 +61,6 @@ body {
 	  * See http://stackoverflow.com/a/29313685/1935861
 	  */
 	overflow-y: hidden;
-}
-
-a,
-a:hover,
-a:focus {
-	color: var(--link-color);
-}
-
-a:hover {
-	text-decoration: underline;
 }
 
 /**
@@ -264,7 +254,6 @@ kbd {
 #help .report-issue-link::before,
 #image-viewer .previous-image-btn::before,
 #image-viewer .next-image-btn::before,
-#sidebar .not-secure-icon::before,
 #sidebar .not-connected-icon::before,
 #sidebar .collapse-network-icon::before {
 	font: normal normal normal 14px/1 FontAwesome;
@@ -289,10 +278,6 @@ kbd {
 .context-menu-action-voice::before { content: "\f067"; /* http://fontawesome.io/icon/plus/ */ }
 .context-menu-network::before { content: "\f233"; /* https://fontawesome.com/icons/server?style=solid */ }
 .context-menu-edit::before { content: "\f303"; /* https://fontawesome.com/icons/pencil-alt?style=solid */ }
-
-#sidebar .not-secure-icon::before {
-	content: "\f071"; /* https://fontawesome.com/icons/exclamation-triangle?style=solid */
-}
 
 #sidebar .not-connected-icon::before {
 	content: "\f127"; /* https://fontawesome.com/icons/unlink?style=solid */
@@ -417,7 +402,6 @@ kbd {
 }
 
 #chat .count::before {
-	color: #cfcfcf;
 	content: "\f002"; /* http://fontawesome.io/icon/search/ */
 	position: absolute;
 	right: 13px;
@@ -544,7 +528,6 @@ kbd {
 
 #sidebar .chan,
 #sidebar .empty {
-	color: #b7c5d1;
 	font-size: 15px;
 }
 
@@ -624,7 +607,6 @@ background on hover (unless active) */
 }
 
 #sidebar .chan.lobby {
-	color: #84ce88;
 	font-size: 15px;
 	font-weight: bold;
 	padding-left: 0;
@@ -641,29 +623,13 @@ background on hover (unless active) */
 	color: #c0f8c3;
 }
 
-#sidebar .not-connected-tooltip,
-#sidebar .not-secure-tooltip {
+#sidebar .not-connected-tooltip {
 	display: none;
 	margin: 0 8px;
 }
 
-#sidebar .not-connected .not-connected-tooltip,
-#sidebar .not-secure .not-secure-tooltip {
+#sidebar .not-connected .not-connected-tooltip {
 	display: inline-block;
-}
-
-#sidebar .not-connected .not-secure-tooltip {
-	/* Do not display insecure icon if disconnected */
-	display: none;
-}
-
-#sidebar .not-secure .chan.lobby {
-	color: #f39c12;
-}
-
-#sidebar .not-secure .chan.lobby .lobby-wrap:hover,
-#sidebar .not-secure .chan.lobby.active {
-	color: #f8c572;
 }
 
 #sidebar .not-connected .chan.lobby {
@@ -705,7 +671,6 @@ background on hover (unless active) */
 #sidebar .badge {
 	background: rgba(255, 255, 255, 0.06);
 	border-radius: 3px;
-	color: #afb6c0;
 	font-size: 10px;
 	padding: 4px 6px;
 	transition: background-color 0.2s, color 0.2s;
@@ -752,7 +717,6 @@ background on hover (unless active) */
 	line-height: 16px;
 	text-align: center;
 	content: "+";
-	color: #fff;
 }
 
 #sidebar .lobby .add-channel:hover {
@@ -790,7 +754,6 @@ background on hover (unless active) */
 
 #sidebar .network .collapse-network-icon::before {
 	content: "\f0d7"; /* http://fontawesome.io/icon/caret-down/ */
-	color: #fff;
 }
 
 #sidebar .collapse-network:hover {
@@ -815,7 +778,6 @@ background on hover (unless active) */
 }
 
 #footer button {
-	color: #b7c5d1;
 	display: inline-block;
 	width: 45px;
 	height: 100%;
@@ -905,8 +867,6 @@ background on hover (unless active) */
 }
 
 #windows .window h2 {
-	border-bottom: 1px solid #7f8c8d;
-	color: #7f8c8d;
 	font-size: 22px;
 	margin: 30px 0 10px;
 	padding-bottom: 7px;
@@ -918,7 +878,6 @@ background on hover (unless active) */
 }
 
 #windows .window h3 {
-	color: #7f8c8d;
 	font-size: 18px;
 	margin: 20px 0 10px;
 }
@@ -938,7 +897,7 @@ background on hover (unless active) */
 }
 
 #windows #chat .header {
-	border-bottom: 1px solid #e7e7e7;
+	border-bottom: 1px solid var(--separator-border-color);
 }
 
 #windows .header .title {
@@ -948,7 +907,6 @@ background on hover (unless active) */
 }
 
 #windows .header .topic {
-	color: var(--body-color-muted);
 	margin-left: 8px;
 	word-break: break-all;
 	flex-grow: 1;
@@ -1043,7 +1001,7 @@ background on hover (unless active) */
 }
 
 #chat .userlist {
-	border-left: 1px solid #e7e7e7;
+	border-left: 1px solid var(--separator-border-color);
 	width: 180px;
 	display: none;
 	flex-direction: column;
@@ -1119,7 +1077,7 @@ background on hover (unless active) */
 	left: 0;
 	right: 0;
 	top: 50%;
-	border-top: 1px solid var(--unread-marker-color);
+	border-top: 1px solid var(--separator-border-color);
 }
 
 #chat .unread-marker-text::before {
@@ -1149,7 +1107,7 @@ background on hover (unless active) */
 	left: 0;
 	right: 0;
 	top: 50%;
-	border-top: 1px solid var(--date-marker-color);
+	border-top: 1px solid var(--separator-border-color);
 }
 
 #chat .date-marker-text::before {
@@ -1190,7 +1148,7 @@ background on hover (unless active) */
 	min-width: 0;
 	padding-left: 10px;
 	padding-right: 6px;
-	border-left: 1px solid #f6f6f6;
+	border-left: 1px solid var(--separator-border-color);
 	overflow: hidden; /* Prevents Zalgo text to expand beyond messages */
 }
 
@@ -1239,10 +1197,6 @@ background on hover (unless active) */
 #chat.colored-nicks .user.color-27 { color: #215f5f; }
 #chat.colored-nicks .user.color-28 { color: #1d1dd3; }
 #chat.colored-nicks .user.color-29 { color: #822882; }
-
-#chat .self .text {
-	color: var(--body-color-muted);
-}
 
 #chat .msg.channel_list_loading .text {
 	color: #999;
@@ -1321,10 +1275,8 @@ background on hover (unless active) */
 #chat .action .from,
 #chat .action .text,
 #chat .action .user {
-	color: #f39c12;
 }
 
-#chat .notice .time,
 #chat .notice .text,
 #chat .chan .notice .user {
 	color: #0074d9 !important;
@@ -1339,23 +1291,18 @@ background on hover (unless active) */
 	color: #e74c3c;
 }
 
-#chat .channel .msg.highlight {
-	background-color: var(--highlight-bg-color);
+#chat .channel .message.highlight {
+	color: var(--highlight-fg-color);
 	border-left: 5px solid var(--highlight-border-color);
 }
 
 #chat .channel .msg.highlight .time {
 	padding-left: 5px;
 	width: 50px;
-	color: #696969;
 }
 
 #chat.show-seconds .channel .msg.highlight .time {
 	width: 70px;
-}
-
-#chat .channel .msg.highlight .content {
-	border-left: 1px solid var(--highlight-bg-color);
 }
 
 #chat .toggle-content.opened .more-caret, /* Expand/Collapse link previews */
@@ -1485,7 +1432,6 @@ part/quit messages where we don't load previews (adds a blank line otherwise) */
 }
 
 #chat .userlist .count {
-	background: #fafafa;
 	height: 45px;
 	flex-shrink: 0;
 	position: relative;
@@ -1494,6 +1440,7 @@ part/quit messages where we don't load previews (adds a blank line otherwise) */
 #chat .userlist .search {
 	color: var(--body-color);
 	border: 0;
+	border-bottom: 1px solid var(--separator-border-color);
 	background: none;
 	font: inherit;
 	outline: 0;
@@ -1518,7 +1465,7 @@ part/quit messages where we don't load previews (adds a blank line otherwise) */
 
 #chat .names .user {
 	display: block;
-	line-height: 1.6;
+	line-height: 1.4;
 	padding: 0 16px;
 	white-space: nowrap;
 }
@@ -1893,11 +1840,10 @@ part/quit messages where we don't load previews (adds a blank line otherwise) */
 #form {
 	flex: 0 0 auto;
 	border: 0;
-	border-top: 1px solid #e7e7e7;
+	border-top: 1px solid var(--separator-border-color);
 	border-radius: 0;
 	margin: 0;
 	padding: 6px;
-	background: white;
 	display: flex;
 	align-items: flex-end;
 }
