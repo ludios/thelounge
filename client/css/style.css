@@ -542,19 +542,6 @@ kbd {
 	-webkit-overflow-scrolling: touch;
 }
 
-#sidebar .logo-container {
-	text-align: center;
-}
-
-#sidebar .logo,
-#sidebar .logo-inverted {
-	height: 45px;
-}
-
-#sidebar .logo {
-	display: none;
-}
-
 #sidebar .chan,
 #sidebar .empty {
 	color: #b7c5d1;
@@ -1644,10 +1631,6 @@ part/quit messages where we don't load previews (adds a blank line otherwise) */
 	flex-grow: 0;
 }
 
-#windows .logo-inverted {
-	display: none; /* In dark themes, inverted logo must be used instead */
-}
-
 #sign-in label {
 	display: block;
 	margin-top: 10px;
@@ -2340,10 +2323,6 @@ part/quit messages where we don't load previews (adds a blank line otherwise) */
 	.tooltipped-no-touch:hover::after {
 		visibility: hidden;
 		opacity: 0;
-	}
-
-	#sidebar .logo-container {
-		margin-top: 5px;
 	}
 
 	#sidebar button,

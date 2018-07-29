@@ -51,10 +51,6 @@
 		<div id="viewport" role="tablist">
 			<aside id="sidebar">
 				<div class="scrollable-area">
-					<div class="logo-container">
-						<img src="img/logo-<%- public ? 'horizontal-' : '' %>transparent-bg.svg" class="logo" alt="The Lounge">
-						<img src="img/logo-<%- public ? 'horizontal-' : '' %>transparent-bg-inverted.svg" class="logo-inverted" alt="The Lounge">
-					</div>
 					<div class="networks"></div>
 					<div class="empty">
 						You are not connected to any networks yet.
