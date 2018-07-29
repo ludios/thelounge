@@ -31,7 +31,7 @@ Mousetrap.bind([
 		scrollTop = Math.ceil(scrollTop + offset);
 	}
 
-	container.animate({scrollTop}, 200);
+	container.scrollTop(scrollTop);
 
 	return false;
 });
