@@ -233,19 +233,7 @@ Network.prototype.destroy = function() {
 
 Network.prototype.setNick = function(nick) {
 	this.nick = nick;
-	this.highlightRegex = new RegExp(
-		// Do not match characters and numbers (unless IRC color)
-		"(?:^|[^a-z0-9]|\x03[0-9]{1,2})" +
-
-		// Escape nickname, as it may contain regex stuff
-		_.escapeRegExp(nick) +
-
-		// Do not match characters and numbers
-		"(?:[^a-z0-9]|$)",
-
-		// Case insensitive search
-		"i"
-	);
+	this.highlightRegex = new RegExp("\\b" + _.escapeRegExp(nick) + "\\b", "i");
 };
 
 /**
