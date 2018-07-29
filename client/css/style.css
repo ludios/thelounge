@@ -474,7 +474,7 @@ kbd {
 #chat button.menu {
 	color: #607992;
 	display: flex;
-	font-size: 14px;
+	font-size: 15px;
 	line-height: 1;
 	height: 36px;
 	width: 36px;
@@ -558,7 +558,7 @@ kbd {
 #sidebar .chan,
 #sidebar .empty {
 	color: #b7c5d1;
-	font-size: 14px;
+	font-size: 15px;
 }
 
 #sidebar .network.collapsed .chan:not(.lobby) {
@@ -821,7 +821,7 @@ background on hover (unless active) */
 
 #footer {
 	height: 45px;
-	font-size: 14px;
+	font-size: 15px;
 	flex-shrink: 0;
 	display: flex;
 	justify-content: center;
@@ -859,7 +859,7 @@ background on hover (unless active) */
 #windows p,
 #windows label,
 #settings .error {
-	font-size: 14px;
+	font-size: 15px;
 }
 
 .input {
@@ -867,7 +867,7 @@ background on hover (unless active) */
 	border: 1px solid #cdd3da;
 	border-radius: 2px;
 	color: #222;
-	font-size: 14px;
+	font-size: 15px;
 	margin: 2px 0;
 	margin-bottom: 10px;
 	outline: 0;
@@ -966,7 +966,7 @@ background on hover (unless active) */
 	word-break: break-all;
 	flex-grow: 1;
 	overflow: hidden;
-	font-size: 14px;
+	font-size: 15px;
 }
 
 #chat {
@@ -1034,7 +1034,7 @@ background on hover (unless active) */
 #windows #form,
 .messages .msg,
 .userlist {
-	font-size: 14px;
+	font-size: 15px;
 	line-height: 1.4;
 }
 
@@ -1604,7 +1604,7 @@ part/quit messages where we don't load previews (adds a blank line otherwise) */
 }
 
 #loading.active {
-	font-size: 14px;
+	font-size: 15px;
 	z-index: 1;
 	display: flex;
 	flex-direction: column;
@@ -1724,7 +1724,7 @@ part/quit messages where we don't load previews (adds a blank line otherwise) */
 }
 
 #settings #play {
-	font-size: 14px;
+	font-size: 15px;
 	transition: opacity 0.2s;
 }
 
@@ -1796,7 +1796,7 @@ part/quit messages where we don't load previews (adds a blank line otherwise) */
 
 #help .help-item {
 	display: table-row;
-	font-size: 14px;
+	font-size: 15px;
 }
 
 #help .help-item .subject,
@@ -2000,7 +2000,7 @@ part/quit messages where we don't load previews (adds a blank line otherwise) */
 #form #upload,
 #form #submit {
 	color: #607992;
-	font-size: 14px;
+	font-size: 15px;
 	height: 32px;
 	width: 32px;
 	flex: 0 0 auto;
@@ -2024,7 +2024,7 @@ part/quit messages where we don't load previews (adds a blank line otherwise) */
 	margin: 0;
 	padding: 0;
 	min-width: 180px;
-	font-size: 14px;
+	font-size: 15px;
 	background-color: #fff;
 	box-shadow: 0 3px 12px rgba(0, 0, 0, 0.15);
 	border: 1px solid rgba(0, 0, 0, 0.15);
