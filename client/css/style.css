@@ -1126,12 +1126,7 @@ background on hover (unless active) */
 #chat .time {
 	color: var(--body-color-muted);
 	padding-left: 10px;
-	width: 55px;
 	font-variant-numeric: tabular-nums;
-}
-
-#chat.show-seconds .time {
-	width: 75px;
 }
 
 #chat .from {
@@ -1281,11 +1276,6 @@ background on hover (unless active) */
 
 #chat .channel .msg.highlight .time {
 	padding-left: 5px;
-	width: 50px;
-}
-
-#chat.show-seconds .channel .msg.highlight .time {
-	width: 70px;
 }
 
 #chat .toggle-content.opened .more-caret, /* Expand/Collapse link previews */
