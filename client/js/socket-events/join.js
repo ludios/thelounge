@@ -22,16 +22,4 @@ socket.on("join", function(data) {
 		})
 	);
 	render.renderChannel(data.chan);
-
-	// Queries do not automatically focus, unless the user did a whois
-	if (data.chan.type === "query" && !data.shouldOpen) {
-		return;
-	}
-
-	sidebar.find(".chan")
-		.sort(function(a, b) {
-			return $(a).data("id") - $(b).data("id");
-		})
-		.last()
-		.trigger("click");
 });
