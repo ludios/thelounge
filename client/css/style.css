@@ -703,7 +703,7 @@ p {
 
 .channel-list-item {
 	display: flex;
-	padding: 8px 14px;
+	padding: 2px 14px;
 	position: relative;
 	cursor: pointer;
 }
@@ -1191,7 +1191,7 @@ textarea.input {
 .messages .msg,
 .userlist {
 	font-size: 15px;
-	line-height: 1.4;
+	line-height: 1.3;
 }
 
 #chat .chat-content {
@@ -1374,7 +1374,6 @@ textarea.input {
 #chat .time,
 #chat .from,
 #chat .content {
-	padding: 3px 0;
 	flex: 0 0 auto;
 }
 
