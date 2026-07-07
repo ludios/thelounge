@@ -47,7 +47,6 @@
 import {
 	generateUserContextMenu,
 	generateChannelContextMenu,
-	generateInlineChannelContextMenu,
 	ContextMenuItem,
 } from "../js/helpers/contextMenu";
 import eventbus from "../js/eventbus";
@@ -201,13 +200,6 @@ export default defineComponent({
 			open(data.event, newItems);
 		};
 
-		const openInlineChannelContextMenu = (data: {channel: string; event: MouseEvent}) => {
-			const {network} = store.state.activeChannel;
-			const newItems = generateInlineChannelContextMenu(store, data.channel, network);
-
-			open(data.event, newItems);
-		};
-
 		const openUserContextMenu = (data: {
 			user: Pick<ClientUser, "nick" | "modes">;
 			event: MouseEvent;
@@ -254,7 +246,6 @@ export default defineComponent({
 			eventbus.on("contextmenu:cancel", close);
 			eventbus.on("contextmenu:user", openUserContextMenu);
 			eventbus.on("contextmenu:channel", openChannelContextMenu);
-			eventbus.on("contextmenu:inline-channel", openInlineChannelContextMenu);
 		});
 
 		onUnmounted(() => {
@@ -262,7 +253,6 @@ export default defineComponent({
 			eventbus.off("contextmenu:cancel", close);
 			eventbus.off("contextmenu:user", openUserContextMenu);
 			eventbus.off("contextmenu:channel", openChannelContextMenu);
-			eventbus.off("contextmenu:inline-channel", openInlineChannelContextMenu);
 
 			close();
 		});

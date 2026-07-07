@@ -14,8 +14,7 @@ export default defineComponent({
 	render(context) {
 		return parse(
 			typeof context.text !== "undefined" ? context.text : context.message.text,
-			context.message,
-			context.network
+			context.message
 		);
 	},
 });

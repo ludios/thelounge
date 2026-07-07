@@ -239,52 +239,6 @@ export function generateChannelContextMenu(
 	return items;
 }
 
-export function generateInlineChannelContextMenu(
-	store: TypedStore,
-	chan: string,
-	network: ClientNetwork
-): ContextMenuItem[] {
-	const join = () => {
-		const channel = network.channels.find((c) => c.name === chan);
-
-		if (channel) {
-			switchToChannel(channel);
-		}
-
-		if (store.state.activeChannel) {
-			socket.emit("input", {
-				target: store.state.activeChannel.channel.id,
-				text: "/join " + chan,
-			});
-		} else {
-			// eslint-disable-next-line no-console
-			console.error("Unable to join channel: activeChannel is undefined");
-		}
-	};
-
-	const channel = network.channels.find((c) => c.name === chan);
-
-	if (channel) {
-		return [
-			{
-				label: "Go to channel",
-				type: "item",
-				class: "chan",
-				link: `/chan-${channel.id}`,
-			},
-		];
-	}
-
-	return [
-		{
-			label: "Join channel",
-			type: "item",
-			class: "join",
-			action: join,
-		},
-	];
-}
-
 export function generateUserContextMenu(
 	store: TypedStore,
 	channel: ClientChan,

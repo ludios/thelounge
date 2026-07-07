@@ -1,6 +1,5 @@
 import anyIntersection from "./anyIntersection";
 import fill from "./fill";
-import {ChannelPart} from "./findChannels";
 import {EmojiPart} from "./findEmoji";
 import {LinkPart} from "../../../../shared/linkify";
 
@@ -37,10 +36,10 @@ function sortParts(a: Part, b: Part) {
 	return a.start - b.start || b.end - a.end;
 }
 
-export type MergedParts = (TextPart | EmojiPart | ChannelPart | LinkPart)[];
+export type MergedParts = (TextPart | EmojiPart | LinkPart)[];
 
 // Merge the style fragments within the text parts, taking into account
-// boundaries and text sections that have not matched to links or channels.
+// boundaries and text sections that have not matched to links.
 // For example, given a string "foobar" where "foo" and "bar" have been
 // identified as parts (channels, links, etc.) and "fo", "ob" and "ar" have 3
 // different styles, the first resulting part will contain fragments "fo" and

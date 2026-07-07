@@ -3,15 +3,13 @@
 
 import {h as createElement, VNode} from "vue";
 import parseStyle from "./ircmessageparser/parseStyle";
-import findChannels from "./ircmessageparser/findChannels";
 import {findLinks} from "../../../shared/linkify";
 import findEmoji from "./ircmessageparser/findEmoji";
 import merge, {MergedParts} from "./ircmessageparser/merge";
 import emojiMap from "./fullnamemap.json";
 import LinkPreviewToggle from "../../components/LinkPreviewToggle.vue";
 import LinkPreviewFileSize from "../../components/LinkPreviewFileSize.vue";
-import InlineChannel from "../../components/InlineChannel.vue";
-import {ClientMessage, ClientNetwork} from "../types";
+import {ClientMessage} from "../types";
 
 const emojiModifiersRegex = /[\u{1f3fb}-\u{1f3ff}]|\u{fe0f}/gu;
 
@@ -94,32 +92,27 @@ function createFragment(fragment: StyledFragment): VNode | string | undefined {
 	return hasData ? createElement("span", data, fragment.text) : fragment.text;
 }
 
-// Transform an IRC message potentially filled with styling control codes, URLs,
-// and channels into a string of HTML elements to display on the client.
-function parse(text: string, message?: ClientMessage, network?: ClientNetwork) {
+// Transform an IRC message potentially filled with styling control codes
+// and URLs into a string of HTML elements to display on the client.
+function parse(text: string, message?: ClientMessage) {
 	// Extract the styling information and get the plain text version from it
 	const styleFragments = parseStyle(text);
 	const cleanText = styleFragments.map((fragment) => fragment.text).join("");
 
-	// On the plain text, find channels and URLs, returned as "parts". Parts are
+	// On the plain text, find URLs and emojis, returned as "parts". Parts are
 	// arrays of objects containing start and end markers, as well as metadata
-	// depending on what was found (channel or link).
-	const channelPrefixes = network ? network.serverOptions.CHANTYPES : ["#", "&"];
-	const userModes = network
-		? network.serverOptions.PREFIX?.prefix?.map((pref) => pref.symbol)
-		: ["!", "@", "%", "+"];
-	const channelParts = findChannels(cleanText, channelPrefixes, userModes);
+	// depending on what was found.
 	const linkParts = findLinks(cleanText);
 	const emojiParts = findEmoji(cleanText);
 
-	const parts = (channelParts as MergedParts).concat(linkParts).concat(emojiParts);
+	const parts = (linkParts as MergedParts).concat(emojiParts);
 
-	// Merge the styling information with the channels / URLs / text objects and
+	// Merge the styling information with the URL / text objects and
 	// generate HTML strings with the resulting fragments
 	return merge(parts, styleFragments, cleanText).map((textPart) => {
 		const fragments = textPart.fragments.map((fragment) => createFragment(fragment));
 
-		// Wrap these potentially styled fragments with links and channel buttons
+		// Wrap these potentially styled fragments with links
 		if (textPart.link) {
 			const preview =
 				message &&
@@ -165,16 +158,6 @@ function parse(text: string, message?: ClientMessage, network?: ClientNetwork) {
 					dir: "auto",
 				},
 				linkEls
-			);
-		} else if (textPart.channel) {
-			return createElement(
-				InlineChannel,
-				{
-					channel: textPart.channel,
-				},
-				{
-					default: () => fragments,
-				}
 			);
 		} else if (textPart.emoji) {
 			const emojiWithoutModifiers = textPart.emoji.replace(emojiModifiersRegex, "");

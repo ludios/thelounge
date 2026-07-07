@@ -1382,18 +1382,6 @@ textarea.input {
 	word-break: normal;
 }
 
-/* Parsed nicks and channels */
-
-#chat .user,
-.inline-channel {
-	cursor: pointer;
-}
-
-.chat .user:hover,
-.inline-channel:hover {
-	text-decoration: underline;
-}
-
 /* Nicknames */
 
 .user {
