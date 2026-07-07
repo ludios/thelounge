@@ -23,25 +23,28 @@ describe("Nickname highlights", function () {
 		expect("lounge- bot").to.not.match(network.highlightRegex as any);
 		expect("Alounge-bot").to.not.match(network.highlightRegex as any);
 		expect("lounge-botW").to.not.match(network.highlightRegex as any);
+		expect("not_lounge-bot").to.not.match(network.highlightRegex as any);
+		expect("lounge-bot_not").to.not.match(network.highlightRegex as any);
+		expect("lounge-bot_, hey").to.not.match(network.highlightRegex as any);
+		expect("\x0312lounge-bot").to.not.match(network.highlightRegex as any);
 	});
 
 	it("should highlight nickname", function () {
 		network.setNick("lounge-bot");
 
 		expect("lounge-bot").to.match(network.highlightRegex as any);
+		expect("lounge-bot.").to.match(network.highlightRegex as any);
 		expect("LoUnge-Bot").to.match(network.highlightRegex as any);
 		expect("LoUnge-Bot:hello").to.match(network.highlightRegex as any);
 		expect("lounge-bot, hello").to.match(network.highlightRegex as any);
 		expect("lounge-bot: hello").to.match(network.highlightRegex as any);
 		expect("lounge-bot hello").to.match(network.highlightRegex as any);
-		expect("\x0312lounge-bot").to.match(network.highlightRegex as any);
 		expect("lounge-bot\x0312 test").to.match(network.highlightRegex as any);
 		expect("|lounge-bot").to.match(network.highlightRegex as any);
 		expect("www.lounge-bot.example.com").to.match(network.highlightRegex as any);
 		expect(" lounge-bot").to.match(network.highlightRegex as any);
 		expect("@lounge-bot").to.match(network.highlightRegex as any);
 		expect("+lounge-bot").to.match(network.highlightRegex as any);
-		expect("lounge-bot_, hey").to.match(network.highlightRegex as any);
 		expect("lounge-bot-, hey").to.match(network.highlightRegex as any);
 		expect("lounge-bot|sleep, hey").to.match(network.highlightRegex as any);
 		expect("LOUNGE-bot|sleep, hey").to.match(network.highlightRegex as any);

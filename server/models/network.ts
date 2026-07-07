@@ -484,17 +484,9 @@ class Network {
 
 	setNick(this: Network, nick: string) {
 		this.nick = nick;
-		this.highlightRegex = new RegExp(
-			// Do not match characters and numbers (unless IRC color)
-			"(?:^|[^a-z0-9]|\x03[0-9]{1,2})" +
-				// Escape nickname, as it may contain regex stuff
-				_.escapeRegExp(nick) +
-				// Do not match characters and numbers
-				"(?:[^a-z0-9]|$)",
-
-			// Case insensitive search
-			"i"
-		);
+		// \b keeps not_nick and nick_not from highlighting nick: underscores
+		// and alphanumerics are word characters, so no boundary forms there.
+		this.highlightRegex = new RegExp("\\b" + _.escapeRegExp(nick) + "\\b", "i");
 
 		if (this.keepNick === nick) {
 			this.keepNick = null;
