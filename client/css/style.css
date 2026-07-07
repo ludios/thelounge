@@ -1341,18 +1341,7 @@ textarea.input {
 #chat .time {
 	color: var(--body-color-muted);
 	padding-left: 10px;
-	width: 55px;
 	font-variant-numeric: tabular-nums;
-	box-sizing: content-box; /* highlights have a border-left */
-}
-
-#chat.time-12h .time,
-#chat.time-seconds .time {
-	width: 75px;
-}
-
-#chat.time-seconds.time-12h .time {
-	width: 90px;
 }
 
 #chat .from {
