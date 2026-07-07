@@ -74,7 +74,7 @@ const defaultConfig = {
 		default: false,
 	},
 	showSeconds: {
-		default: false,
+		default: true,
 	},
 	use12hClock: {
 		default: false,
