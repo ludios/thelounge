@@ -3,6 +3,8 @@ const rcolors = [19, 20, 22, 24, 25, 26, 27, 28, 29];
 
 // Generates a string from "color-19" to "color-29" based on an input string
 export default (str: string) => {
+	// Matrix bridge people: color M-nick the same as nick
+	str = str.replace(/^M-/, "");
 	let sum = 0;
 
 	for (let i = 0; i < str.length; i++) {
