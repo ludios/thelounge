@@ -6,13 +6,11 @@ import parseStyle from "./ircmessageparser/parseStyle";
 import findChannels from "./ircmessageparser/findChannels";
 import {findLinks} from "../../../shared/linkify";
 import findEmoji from "./ircmessageparser/findEmoji";
-import findNames from "./ircmessageparser/findNames";
 import merge, {MergedParts} from "./ircmessageparser/merge";
 import emojiMap from "./fullnamemap.json";
 import LinkPreviewToggle from "../../components/LinkPreviewToggle.vue";
 import LinkPreviewFileSize from "../../components/LinkPreviewFileSize.vue";
 import InlineChannel from "../../components/InlineChannel.vue";
-import Username from "../../components/Username.vue";
 import {ClientMessage, ClientNetwork} from "../types";
 
 const emojiModifiersRegex = /[\u{1f3fb}-\u{1f3ff}]|\u{fe0f}/gu;
@@ -97,7 +95,7 @@ function createFragment(fragment: StyledFragment): VNode | string | undefined {
 }
 
 // Transform an IRC message potentially filled with styling control codes, URLs,
-// nicknames, and channels into a string of HTML elements to display on the client.
+// and channels into a string of HTML elements to display on the client.
 function parse(text: string, message?: ClientMessage, network?: ClientNetwork) {
 	// Extract the styling information and get the plain text version from it
 	const styleFragments = parseStyle(text);
@@ -113,14 +111,10 @@ function parse(text: string, message?: ClientMessage, network?: ClientNetwork) {
 	const channelParts = findChannels(cleanText, channelPrefixes, userModes);
 	const linkParts = findLinks(cleanText);
 	const emojiParts = findEmoji(cleanText);
-	const nameParts = findNames(cleanText, message ? message.users || [] : []);
 
-	const parts = (channelParts as MergedParts)
-		.concat(linkParts)
-		.concat(emojiParts)
-		.concat(nameParts);
+	const parts = (channelParts as MergedParts).concat(linkParts).concat(emojiParts);
 
-	// Merge the styling information with the channels / URLs / nicks / text objects and
+	// Merge the styling information with the channels / URLs / text objects and
 	// generate HTML strings with the resulting fragments
 	return merge(parts, styleFragments, cleanText).map((textPart) => {
 		const fragments = textPart.fragments.map((fragment) => createFragment(fragment));
@@ -197,19 +191,6 @@ function parse(text: string, message?: ClientMessage, network?: ClientNetwork) {
 					title: title,
 				},
 				fragments
-			);
-		} else if (textPart.nick) {
-			return createElement(
-				Username,
-				{
-					user: {
-						nick: textPart.nick,
-					},
-					dir: "auto",
-				},
-				{
-					default: () => fragments,
-				}
 			);
 		}
 
