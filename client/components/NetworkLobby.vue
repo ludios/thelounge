@@ -14,13 +14,6 @@
 		<div class="lobby-wrap">
 			<span :title="channel.name" class="name">{{ channel.name }}</span>
 			<span
-				v-if="network.status.connected && !network.status.secure"
-				class="not-secure-tooltip tooltipped tooltipped-w"
-				aria-label="Insecure connection"
-			>
-				<span class="not-secure-icon" />
-			</span>
-			<span
 				v-if="!network.status.connected"
 				class="not-connected-tooltip tooltipped tooltipped-w"
 				aria-label="Disconnected"

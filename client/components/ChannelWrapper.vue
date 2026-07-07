@@ -10,10 +10,6 @@
 			{'has-draft': channel.pendingMessage},
 			{'has-unread': channel.unread},
 			{'has-highlight': channel.highlight},
-			{
-				'not-secure':
-					channel.type === 'lobby' && network.status.connected && !network.status.secure,
-			},
 			{'not-connected': channel.type === 'lobby' && !network.status.connected},
 			{'is-muted': channel.muted},
 		]"

@@ -10,13 +10,13 @@
 
 :root {
 	/* Main text color */
-	--body-color: #222;
+	--body-color: #000;
 
 	/* Secondary text color, dimmed. Make sure to keep contrast WCAG 2.0 AA compliant on var(--window-bg-color) */
-	--body-color-muted: #767676;
+	--body-color-muted: #5f5f5f;
 
 	/* Background color of the whole page */
-	--body-bg-color: #415364;
+	--body-bg-color: #ccc5c1;
 
 	/* Main button color. Applies to border, text, and background on hover */
 	--button-color: #84ce88;
@@ -29,20 +29,23 @@
 	--link-color: #50a656;
 
 	/* Background color of the main window */
-	--window-bg-color: #fff;
+	--window-bg-color: #e4dcd7;
 
 	/* Text color for <h2> and <h3> headings in windows */
 	--window-heading-color: #6c797a;
 
 	/* Color of the date marker, text and separator */
-	--date-marker-color: rgb(0 107 59 / 50%);
+	--date-marker-color: rgb(84 52 39 / 50%);
 
 	/* Color of the unread message marker, text and separator */
-	--unread-marker-color: rgb(231 76 60 / 50%);
+	--unread-marker-color: rgb(125 35 25 / 65%);
 
-	/* Background and left-border color of highlight messages */
-	--highlight-bg-color: #efe8dc;
-	--highlight-border-color: #b08c4f;
+	/* Text and left-border color of highlight messages */
+	--highlight-fg-color: #da0000;
+	--highlight-border-color: #da0000;
+
+	/* Color for various borders */
+	--separator-border-color: #bfb2b2;
 
 	/* Color of the progress bar that appears as a file is being uploaded to the server. Defaults to button color */
 	--upload-progressbar-color: var(--button-color);
@@ -115,23 +118,6 @@ body {
 
 body.force-no-select * {
 	user-select: none !important;
-}
-
-a,
-a:hover,
-a:focus {
-	color: var(--link-color);
-	text-decoration: none;
-}
-
-a:hover {
-	text-decoration: underline;
-}
-
-a:focus {
-	outline: thin dotted;
-	outline: 5px auto -webkit-focus-ring-color;
-	outline-offset: -2px;
 }
 
 h1,
@@ -344,7 +330,6 @@ p {
 #image-viewer .previous-image-btn::before,
 #image-viewer .next-image-btn::before,
 #image-viewer .open-btn::before,
-.channel-list-item .not-secure-icon::before,
 .channel-list-item .not-connected-icon::before,
 .channel-list-item .parted-channel-icon::before,
 .jump-to-input::before,
@@ -378,10 +363,6 @@ p {
 .context-menu-edit::before { content: "\f303"; /* https://fontawesome.com/icons/pencil-alt?style=solid */ }
 .context-menu-clear-history::before { content: "\f1f8"; /* https://fontawesome.com/icons/trash?style=solid */ }
 .context-menu-mute::before { content: "\f6a9"; /* https://fontawesome.com/v5.15/icons/volume-mute?style=solid */ }
-
-.channel-list-item .not-secure-icon::before {
-	content: "\f071"; /* https://fontawesome.com/icons/exclamation-triangle?style=solid */
-}
 
 .channel-list-item .not-connected-icon::before,
 .channel-list-item .parted-channel-icon::before {
@@ -562,7 +543,6 @@ p {
 }
 
 #chat .count::before {
-	color: #cfcfcf;
 	content: "\f002"; /* http://fontawesome.io/icon/search/ */
 	position: absolute;
 	right: 13px;
@@ -680,7 +660,6 @@ p {
 	width: 220px;
 	max-height: 100%;
 	will-change: transform;
-	color: #b7c5d1; /* same as .channel-list-item color */
 }
 
 #viewport.menu-open #sidebar {
@@ -775,7 +754,6 @@ background on hover (unless active) */
 }
 
 .channel-list-item[data-type="lobby"] {
-	color: #84ce88;
 	font-size: 15px;
 	font-weight: bold;
 	padding-left: 0;
@@ -793,18 +771,8 @@ background on hover (unless active) */
 }
 
 .channel-list-item .not-connected-tooltip,
-.channel-list-item .not-secure-tooltip,
 .channel-list-item .parted-channel-tooltip {
 	margin: 0 8px;
-}
-
-.channel-list-item.not-secure {
-	color: #f39c12;
-}
-
-.channel-list-item.not-secure:hover,
-.channel-list-item.not-secure.active {
-	color: #f8c572;
 }
 
 .channel-list-item.not-connected,
@@ -852,7 +820,6 @@ background on hover (unless active) */
 .channel-list-item .badge {
 	background: rgb(255 255 255 / 6%);
 	border-radius: 3px;
-	color: #afb6c0;
 	font-size: 10px;
 	padding: 4px 6px;
 	transition: background-color 0.2s, color 0.2s;
@@ -908,7 +875,6 @@ background on hover (unless active) */
 	line-height: 16px;
 	text-align: center;
 	content: "+";
-	color: #fff;
 }
 
 .channel-list-item[data-type="lobby"] .add-channel:hover {
@@ -941,7 +907,6 @@ background on hover (unless active) */
 
 #sidebar .network .collapse-network-icon::before {
 	content: "\f0d7"; /* http://fontawesome.io/icon/caret-down/ */
-	color: #fff;
 }
 
 #sidebar .collapse-network:hover {
@@ -957,7 +922,6 @@ background on hover (unless active) */
 }
 
 #footer button {
-	color: #b7c5d1;
 	display: inline-block;
 	width: 45px;
 	height: 100%;
@@ -1042,8 +1006,6 @@ textarea.input {
 }
 
 .window h2 {
-	border-bottom: 1px solid currentcolor;
-	color: var(--window-heading-color);
 	font-size: 22px;
 	margin: 30px 0 10px;
 	padding-bottom: 7px;
@@ -1055,7 +1017,6 @@ textarea.input {
 }
 
 .window h3 {
-	color: var(--window-heading-color);
 	font-size: 18px;
 	margin: 20px 0 10px;
 }
@@ -1071,7 +1032,7 @@ textarea.input {
 }
 
 #chat .header {
-	border-bottom: 1px solid #e7e7e7;
+	border-bottom: 1px solid var(--separator-border-color);
 }
 
 .header .title {
@@ -1215,7 +1176,7 @@ textarea.input {
 }
 
 #chat .userlist {
-	border-left: 1px solid #e7e7e7;
+	border-left: 1px solid var(--separator-border-color);
 	width: 180px;
 	display: none;
 	flex-direction: column;
@@ -1335,7 +1296,7 @@ textarea.input {
 	left: 0;
 	right: 0;
 	top: 50%;
-	border-top: 1px solid var(--unread-marker-color);
+	border-top: 1px solid var(--separator-border-color);
 }
 
 #chat .unread-marker-text::before {
@@ -1361,7 +1322,7 @@ textarea.input {
 	left: 0;
 	right: 0;
 	top: 50%;
-	border-top: 1px solid var(--date-marker-color);
+	border-top: 1px solid var(--separator-border-color);
 }
 
 #chat .date-marker-text::before {
@@ -1408,7 +1369,7 @@ textarea.input {
 	min-width: 0;
 	padding-left: 10px;
 	padding-right: 6px;
-	border-left: 1px solid #f6f6f6;
+	border-left: 1px solid var(--separator-border-color);
 	overflow: hidden; /* Prevents Zalgo text to expand beyond messages */
 	text-align: left; /* so RTL text will still be aligned left, not right */
 }
@@ -1448,10 +1409,6 @@ textarea.input {
 .user.color-27 { color: #215f5f; }
 .user.color-28 { color: #1d1dd3; }
 .user.color-29 { color: #822882; }
-
-#chat .self .content {
-	color: var(--body-color-muted);
-}
 
 #chat .msg.channel_list_loading .text {
 	color: #999;
@@ -1529,14 +1486,6 @@ textarea.input {
 	color: var(--body-color-muted);
 }
 
-#chat .msg[data-type="action"] .from,
-#chat .msg[data-type="action"] .content,
-#chat .msg[data-type="action"] .user {
-	color: #f39c12;
-}
-
-#chat .msg[data-type="notice"] .time,
-#chat .msg[data-type="wallops"] .time,
 #chat .msg[data-type="notice"] .content,
 #chat .msg[data-type="wallops"] .content,
 #chat .msg[data-type="notice"] .user,
@@ -1558,17 +1507,12 @@ textarea.input {
 }
 
 #chat .chat-view[data-type="channel"] .msg.highlight {
-	background-color: var(--highlight-bg-color);
+	color: var(--highlight-fg-color);
 	border-left: 5px solid var(--highlight-border-color);
 }
 
 #chat .chat-view[data-type="channel"] .msg.highlight .time {
 	padding-left: 5px;
-	color: #696969;
-}
-
-#chat .chat-view[data-type="channel"] .msg.highlight .content {
-	border-left: 1px solid var(--highlight-bg-color);
 }
 
 #chat .preview-size {
@@ -1709,7 +1653,6 @@ part/quit messages where we don't load previews (adds a blank line otherwise) */
 }
 
 #chat .userlist .count {
-	background: #fafafa;
 	height: 45px;
 	flex-shrink: 0;
 	position: relative;
@@ -1719,6 +1662,7 @@ part/quit messages where we don't load previews (adds a blank line otherwise) */
 	color: var(--body-color);
 	appearance: none;
 	border: 0;
+	border-bottom: 1px solid var(--separator-border-color);
 	background: none;
 	font: inherit;
 	outline: 0;
@@ -1741,7 +1685,7 @@ part/quit messages where we don't load previews (adds a blank line otherwise) */
 
 #chat .names .user {
 	display: block;
-	line-height: 1.6;
+	line-height: 1.4;
 	padding: 0 16px;
 	white-space: nowrap;
 }
@@ -2176,11 +2120,10 @@ part/quit messages where we don't load previews (adds a blank line otherwise) */
 #form {
 	flex: 0 0 auto;
 	border: 0;
-	border-top: 1px solid #e7e7e7;
+	border-top: 1px solid var(--separator-border-color);
 	border-radius: 0;
 	margin: 0;
 	padding: 6px;
-	background: white;
 	display: flex;
 	align-items: flex-end;
 	position: relative;
