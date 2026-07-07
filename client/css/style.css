@@ -696,19 +696,6 @@ p {
 	-webkit-overflow-scrolling: touch;
 }
 
-#sidebar .logo-container {
-	text-align: center;
-}
-
-#sidebar .logo,
-#sidebar .logo-inverted {
-	height: 45px;
-}
-
-#sidebar .logo {
-	display: none;
-}
-
 .channel-list-item,
 #sidebar .empty {
 	font-size: 15px;
@@ -2625,10 +2612,6 @@ part/quit messages where we don't load previews (adds a blank line otherwise) */
 	.tooltipped-no-touch:hover::after {
 		visibility: hidden;
 		opacity: 0;
-	}
-
-	#sidebar .logo-container {
-		margin-top: 5px;
 	}
 
 	.channel-list-item,
