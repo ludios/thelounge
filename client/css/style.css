@@ -306,7 +306,6 @@ p {
 #settings #play::before,
 #settings .settings-menu .icon::before,
 #form #upload::before,
-#form #submit::before,
 #chat .msg[data-type="away"] .from::before,
 #chat .msg[data-type="back"] .from::before,
 #chat .msg[data-type="invite"] .from::before,
@@ -411,7 +410,6 @@ p {
 #footer .help::before { content: "\f059"; /* http://fontawesome.io/icon/question/ */ }
 
 #form #upload::before { content: "\f0c6"; /* https://fontawesome.com/icons/paperclip?style=solid */ }
-#form #submit::before { content: "\f1d8"; /* http://fontawesome.io/icon/paper-plane/ */ }
 
 #chat .msg[data-type="away"] .from::before,
 #chat .msg[data-type="back"] .from::before {
@@ -2274,8 +2272,7 @@ part/quit messages where we don't load previews (adds a blank line otherwise) */
 	display: none;
 }
 
-#form #upload,
-#form #submit {
+#form #upload {
 	color: #607992;
 	font-size: 15px;
 	height: 32px;
@@ -2283,8 +2280,7 @@ part/quit messages where we don't load previews (adds a blank line otherwise) */
 	flex: 0 0 auto;
 }
 
-#form #upload[disabled],
-#form #submit[disabled] {
+#form #upload[disabled] {
 	opacity: 0.5;
 }
 

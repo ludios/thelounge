@@ -38,18 +38,6 @@
 				:disabled="!store.state.isConnected"
 			/>
 		</span>
-		<span
-			id="submit-tooltip"
-			class="tooltipped tooltipped-w tooltipped-no-touch"
-			data-tooltip="Send message"
-		>
-			<button
-				id="submit"
-				type="submit"
-				aria-label="Send message"
-				:disabled="!store.state.isConnected"
-			/>
-		</span>
 	</form>
 </template>
 
